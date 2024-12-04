@@ -73,7 +73,7 @@ const HeroPage: React.FC = () => {
 
   return (
     <div className="bg-gray-800 text-white flex flex-col items-center justify-start min-h-screen py-10 overflow-y-auto">
-      <h1 className="text-5xl font-bold mb-4">Welcome to TON Zombies</h1>
+      <h1 className="text-5xl font-bold mb-4">Welcome to Learn-a-TON</h1>
       <p className="text-lg mb-6 text-center max-w-lg">
         Master smart contract development on the TON blockchain through fun,
         interactive lessons. Build, learn, and earn rewards as you advance

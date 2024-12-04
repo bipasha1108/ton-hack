@@ -89,7 +89,7 @@ const getQuestionsForLesson = (lessonId: string | undefined) => {
     '1': [
       {
         id: 1,
-        text: 'What is the full form of TON?',
+        text: 'What is TON?',
         options: ['The Open Network', 'Telegram Online Network', 'Total Open Node', 'Transparent Operations Network'],
         correctAnswer: 'The Open Network',
       },
