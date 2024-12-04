@@ -1,0 +1,8 @@
+{
+    "name": "TON Zombies",
+    "description": "A fun dApp for managing zombies on the TON blockchain.",
+    "url": "http://localhost:3000", 
+    "iconUrl": "http://localhost:3000/icon.png", 
+    "bridgeUrl": "https://bridge.tonapi.io/bridge" 
+  }
+  
