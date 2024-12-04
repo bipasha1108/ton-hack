@@ -1,91 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-
-interface LessonProps {
-  onComplete: () => void;
-}
-
-interface Question {
-  id: number;
-  text: string;
-  options: string[];
-  correctAnswer: string;
-}
-
-const Lesson: React.FC<LessonProps> = ({ onComplete }) => {
-  const { lessonId } = useParams();
-  const [completedQuestions, setCompletedQuestions] = useState(0);
-  const [answers, setAnswers] = useState<{ [key: number]: string }>({});
-  const [isCorrect, setIsCorrect] = useState<{ [key: number]: boolean }>({});
-
-  const questions = getQuestionsForLesson(lessonId);
-
-  const handleAnswer = (questionId: number, answer: string) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: answer }));
-
-    if (answer === questions.find((q) => q.id === questionId)?.correctAnswer) {
-      setIsCorrect((prev) => ({ ...prev, [questionId]: true }));
-    } else {
-      setIsCorrect((prev) => ({ ...prev, [questionId]: false }));
-    }
-  };
-
-  const handleCompleteQuestion = (questionId: number) => {
-    if (answers[questionId]) {
-      setCompletedQuestions((prev) => prev + 1);
-    }
-  };
-
-  useEffect(() => {
-    if (completedQuestions === questions.length) {
-      onComplete();
-    }
-  }, [completedQuestions, questions.length, onComplete]);
-
-  return (
-    <div className="bg-gray-800 text-white p-6 min-h-screen">
-      <h2 className="text-4xl font-semibold mb-6">{`Lesson ${lessonId}: ${questions[0]?.text}`}</h2>
-      <div className="space-y-4">
-        {questions.map((question) => (
-          <div key={question.id} className="bg-gray-700 p-4 rounded-lg shadow-md">
-            <p>{question.text}</p>
-            <div className="space-y-2 mt-4">
-              {question.options.map((option) => (
-                <div key={option} className="flex items-center">
-                  <input
-                    type="radio"
-                    id={`${question.id}-${option}`}
-                    name={`question-${question.id}`}
-                    value={option}
-                    onChange={() => handleAnswer(question.id, option)}
-                    className="mr-2"
-                  />
-                  <label htmlFor={`${question.id}-${option}`} className="cursor-pointer">
-                    {option}
-                  </label>
-                </div>
-              ))}
-            </div>
-            <button
-              onClick={() => handleCompleteQuestion(question.id)}
-              className="bg-green-600 px-4 py-2 mt-2 rounded-full text-white hover:bg-green-500 transition duration-300"
-            >
-              Complete Question
-            </button>
-            {isCorrect[question.id] !== undefined && (
-              <p className={`mt-2 ${isCorrect[question.id] ? 'text-green-500' : 'text-red-500'}`}>
-                {isCorrect[question.id] ? 'Correct!' : 'Incorrect. Try again.'}
-              </p>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const getQuestionsForLesson = (lessonId: string | undefined) => {
-  const lessonsData = {
+export const lessonsData = {
     '1': [
       {
         id: 1,
@@ -146,7 +59,7 @@ const getQuestionsForLesson = (lessonId: string | undefined) => {
           'To validate Bitcoin transactions',
           'To mine new TON coins'
         ],
-        correctAnswer: 'To execute smart contracts on the TON Blockchain',
+        correctAnswer: 'They enable smart contract interactions',
       },
       {
         id: 7,
@@ -192,10 +105,7 @@ const getQuestionsForLesson = (lessonId: string | undefined) => {
         ],
         correctAnswer: 'A Soulbound Token for non-transferable achievements',
       },
+
     ],
   };
-
-  return lessonsData[lessonId || '1'];
-};
-
-export default Lesson;
+  

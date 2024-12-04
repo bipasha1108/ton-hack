@@ -22,7 +22,7 @@ const HeroPage: React.FC = () => {
       progress: progress[0],
     },
     {
-      title: "Smart Contract Addresses",
+      title: "TVM vs EVM",
       description:
         "Understand how smart contract addresses work on TON and their role in the blockchain ecosystem.",
       progress: progress[1],
